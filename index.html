@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário Maria</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ffb6d9,#ffcce6,#ffd6f0);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+max-width:600px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+color:#ff4fa3;
+}
+
+#texto{
+line-height:1.6;
+white-space:pre-line;
+}
+
+.tip{
+margin-top:10px;
+font-size:14px;
+color:#777;
+}
+
+.cake{
+position:absolute;
+font-size:32px;
+animation:cair 2.5s linear forwards;
+}
+
+@keyframes cair{
+0%{transform:translateY(-50px);}
+100%{transform:translateY(100vh);}
+}
+
+.heart{
+position:absolute;
+font-size:22px;
+animation:subir 2s forwards;
+}
+
+@keyframes subir{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-150px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🎉 Feliz Aniversário, Maria! 🎉</h1>
+
+<p id="texto"></p>
+
+<div class="tip">(Clique na tela 🎂)</div>
+
+</div>
+
+<script>
+
+const mensagem = `Maria, Maria 🤟🏻
+
+Feliz aniversário! Que tudo na tua vida dê certo e que você seja muito feliz.
+Eu fiz esse presente com carinho. Sei que não é grande coisa, mas espero que você goste bastante.
+
+Também quero dizer que nunca vou esquecer dos momentos que passamos na escola,
+das risadas, das conversas e de tudo que vivemos lá.
+Até do dia em que você me deu um sermão porque eu brinquei com você — pode parecer bobo,
+mas eu nunca vou esquecer desse momento.
+
+Todos esses momentos vão ficar guardados comigo para sempre. 💙`;
+
+let i = 0;
+
+function escrever(){
+if(i < mensagem.length){
+document.getElementById("texto").innerHTML += mensagem.charAt(i);
+i++;
+setTimeout(escrever,35);
+}
+}
+
+escrever();
+
+document.addEventListener("click", function(e){
+
+// bolos (apenas 2 para não travar)
+for(let j=0;j<2;j++){
+
+const bolo = document.createElement("div");
+bolo.className="cake";
+bolo.innerHTML="🎂";
+
+bolo.style.left=Math.random()*window.innerWidth+"px";
+
+document.body.appendChild(bolo);
+
+setTimeout(()=>{
+bolo.remove();
+},2500);
+
+}
+
+// coração onde clicou
+const heart = document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+
+heart.style.left=e.clientX+"px";
+heart.style.top=e.clientY+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},2000);
+
+});
+
+</script>
+
+</body>
+</html>
