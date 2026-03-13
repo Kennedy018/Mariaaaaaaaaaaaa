@@ -1,0 +1,40 @@
+import { useState } from "react"; import { motion } from "framer-motion";
+
+export default function BirthdayMaria() { const [cakes, setCakes] = useState([]);
+
+const handleClick = (e) => { const newCake = { id: Date.now(), x: e.clientX, y: e.clientY, }; setCakes((prev) => [...prev, newCake]); };
+
+return ( <div
+onClick={handleClick}
+className="min-h-screen w-full bg-pink-200 flex flex-col items-center justify-center text-center p-6 cursor-pointer"
+> <h1 className="text-4xl font-bold mb-4">🎉 Feliz Aniversário, Maria! 🎉</h1>
+
+<p className="max-w-xl text-lg bg-white/70 p-6 rounded-2xl shadow">
+    Maria, Maria 🤟🏻 <br /><br />
+    Feliz aniversário! Que tudo na tua vida dê certo e que você seja muito
+    feliz. Eu fiz esse presente com carinho. Sei que não é grande coisa,
+    mas espero que você goste bastante. <br /><br />
+    Também quero dizer que nunca vou esquecer dos momentos que passamos na
+    escola, das risadas, das conversas e de tudo que vivemos lá. Até do dia
+    em que você me deu um sermão porque eu brinquei com você — pode parecer
+    bobo, mas eu nunca vou esquecer desse momento. <br /><br />
+    Todos esses momentos vão ficar guardados comigo para sempre. 💙
+    <br /><br />
+    (Clique em qualquer lugar da tela!)
+  </p>
+
+  {cakes.map((cake) => (
+    <motion.div
+      key={cake.id}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      style={{ position: "absolute", left: cake.x - 20, top: cake.y - 20 }}
+      className="text-3xl"
+    >
+      🎂
+    </motion.div>
+  ))}
+</div>
+
+); }
